@@ -19,16 +19,19 @@ const Hero = ({ productCount, marketCount, categoryCount }: HeroProps) => {
       <div className="flex-1">
         <p className="font-semibold text-green-700">আজকের বাজার দর</p>
         <h2 className="my-3 text-3xl font-bold md:text-4xl">
-          এখানে Penpot-এর মূল হেডিং বসান
+          আজকের বাজারের দাম এক নজরে
         </h2>
-        <p className="mb-5 text-gray-600">এখানে Penpot-এর সাবটাইটেল বসান</p>
+        <p className="mb-5 text-gray-600">
+          চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
+          বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
+        </p>
         <a
           href="#সব-পণ্য"
           className="inline-block rounded-xl bg-green-700 px-5 py-2 font-semibold text-white"
         >
           সব পণ্য দেখুন
         </a>
-        <div className="mt-8 flex gap-6">
+        <div className="mt-8 flex flex-wrap gap-6">
           {stats.map(([num, label]) => (
             <div key={label}>
               <p className="text-2xl font-bold">

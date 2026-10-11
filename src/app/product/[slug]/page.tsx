@@ -18,17 +18,29 @@ const ProductDetails = async ({
   const data = await res.json();
   const products: Product[] = Array.isArray(data) ? data : data.data;
   const product = products.find((p) => p.slug === slug);
-  if (!product) notFound();
+
+  if (!product) {
+    notFound();
+  }
 
   const markets = product.markets;
+
   const minPrice = Math.min(...markets.map((m) => m.min));
   const maxPrice = Math.max(...markets.map((m) => m.max));
-  const total = markets.reduce((sum, m) => sum + (m.min + m.max) / 2, 0);
+
+  let total = 0;
+  for (const m of markets) {
+    total = total + (m.min + m.max) / 2;
+  }
   const avgPrice = Math.round(total / markets.length);
+
+  // Cheapest market = lowest "min", priciest market = highest "max"
+  const cheapest = markets.find((m) => m.min === minPrice);
+  const priciest = markets.find((m) => m.max === maxPrice);
 
   const prices = [
     ["সর্বনিম্ন দাম", minPrice],
-    ["সর্বোচ্চ দাম", maxPrice],
+    ["সর্বাধিক দাম", maxPrice],
     ["গড় দাম", avgPrice],
   ] as const;
 
@@ -51,13 +63,27 @@ const ProductDetails = async ({
           </span>
         </div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        <h2 className="mb-3 mt-8 text-2xl font-bold">দামের সারসংক্ষেপ</h2>
+        <div className="grid gap-4 sm:grid-cols-3">
           {prices.map(([label, value]) => (
             <div key={label} className="rounded-xl border border-gray-200 p-4">
               <p className="text-sm text-gray-500">{label}</p>
               <p className="mt-1 text-2xl font-bold">{bn(value)} টাকা</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="text-sm text-gray-500">সবচেয়ে কম দামের বাজার</p>
+            <p className="mt-1 font-bold">{cheapest?.market}</p>
+            <p className="text-sm">{bn(minPrice)} টাকা</p>
+          </div>
+          <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+            <p className="text-sm text-gray-500">সবচেয়ে বেশি দামের বাজার</p>
+            <p className="mt-1 font-bold">{priciest?.market}</p>
+            <p className="text-sm">{bn(maxPrice)} টাকা</p>
+          </div>
         </div>
 
         <h2 className="mb-3 mt-10 text-2xl font-bold">
@@ -70,7 +96,8 @@ const ProductDetails = async ({
                 <th>বাজার</th>
                 <th>বিভাগ</th>
                 <th>সর্বনিম্ন</th>
-                <th>সর্বোচ্চ</th>
+                <th>সর্বাধিক</th>
+                <th>গড়</th>
               </tr>
             </thead>
             <tbody>
@@ -80,6 +107,7 @@ const ProductDetails = async ({
                   <td>{m.division}</td>
                   <td>{bn(m.min)} টাকা</td>
                   <td>{bn(m.max)} টাকা</td>
+                  <td>{bn(Math.round((m.min + m.max) / 2))} টাকা</td>
                 </tr>
               ))}
             </tbody>

@@ -52,7 +52,9 @@ const Home = async () => {
 
       <section id="সব-পণ্য" className="container mx-auto px-4 py-6">
         <h2 className="text-2xl font-bold">সব পণ্য</h2>
-        <p className="mb-4 text-gray-500">এখানে Penpot-এর সাবটাইটেল বসান</p>
+        <p className="mb-4 text-gray-500">
+          মোট {products.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে
+        </p>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
             <ProductCard key={p.id} product={p} />
