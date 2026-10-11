@@ -10,13 +10,11 @@ const CategoryPage = async ({
   const { slug } = await params;
 
   const res = await fetch(
-    "https://openapi.programming-hero.com/api/bazardor/products",
+    `https://openapi.programming-hero.com/api/bazardor/products?category=${slug}`,
   );
   const data = await res.json();
-  const all: Product[] = Array.isArray(data) ? data : data.data;
-  const products = all.filter((p) => p.category === slug);
-
-  if (products.length === 0) notFound();
+  const products: Product[] = Array.isArray(data) ? data : data.data;
+  if (!products?.length) notFound();
 
   return (
     <div className="container mx-auto px-4 py-8">

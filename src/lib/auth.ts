@@ -7,7 +7,10 @@ const db = client.db();
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, { client }),
-  emailAndPassword: { enabled: true },
+  emailAndPassword: {
+    enabled: true,
+    autoSignIn: false, // don't log in after sign up; user goes to /signin
+  },
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
