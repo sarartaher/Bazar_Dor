@@ -1,6 +1,4 @@
 import { Category } from "@/interfaces/ProductProps";
-import Link from "next/link";
-import React from "react";
 import NavLink from "./NavLink";
 
 const Navlinks = async () => {

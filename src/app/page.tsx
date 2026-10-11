@@ -1,5 +1,5 @@
 import Hero from "@/components/Home/Hero";
-import ProductCard from "@/components/shared/ProductCard";
+import ProductCard from "@/components/Products/ProductCard";
 import { Product } from "@/interfaces/ProductProps";
 
 const Home = async () => {

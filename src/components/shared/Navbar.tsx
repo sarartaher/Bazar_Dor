@@ -1,15 +1,15 @@
 import Image from "next/image";
 import logo from "@/assets/logo-icon.png";
-import Link from "next/link";
 import Navlinks from "./Navlinks";
 import { Suspense } from "react";
 import Marquee from "./Marquee";
 import BanglaDate from "./BanglaDate";
+import AuthButtons from "./AuthButtons";
 
 const Navbar = () => {
   return (
-    <header className="shadow-sm ">
-      <nav className="flex items-center gap-2 container mx-auto py-4 justify-between">
+    <header className="shadow-sm">
+      <nav className="container mx-auto flex items-center justify-between gap-2 px-4 py-4">
         <div className="flex gap-3">
           <Image
             src={logo}
@@ -20,20 +20,10 @@ const Navbar = () => {
           />
           <div className="font-semibold">
             <h1>বাজার দর</h1>
-            <BanglaDate/>
+            <BanglaDate />
           </div>
         </div>
-        <div className="auth-button flex gap-4 font-semibold items-center ">
-          <Link href="/" className="">
-            সাইন ইন
-          </Link>
-          <Link
-            href="/"
-            className="bg-green-700 border-none px-4 py-2 rounded-xl text-white shadow-md"
-          >
-            সাইন আপ
-          </Link>
-        </div>
+        <AuthButtons />
       </nav>
       <Navlinks />
       <Suspense fallback={<div className="h-10 border-y bg-white" />}>

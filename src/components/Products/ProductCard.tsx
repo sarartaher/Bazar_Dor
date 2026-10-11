@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Product } from "@/interfaces/ProductProps";
 
-const units: Record<string, string> = {
+export const units: Record<string, string> = {
   kg: "কেজি",
   litre: "লিটার",
   dozen: "ডজন",
@@ -10,7 +10,7 @@ const units: Record<string, string> = {
 
 const ProductCard = ({ product }: { product: Product }) => {
   const { dir, pct } = product.change;
-  const percent = pct.toLocaleString("bn-BD");
+  const percent = Math.abs(pct).toLocaleString("bn-BD");
 
   return (
     <Link

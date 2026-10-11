@@ -1,5 +1,5 @@
 "use client";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client/auth-client";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
