@@ -4,6 +4,7 @@ import Link from "next/link";
 import Navlinks from "./Navlinks";
 import { Suspense } from "react";
 import Marquee from "./Marquee";
+import BanglaDate from "./BanglaDate";
 
 const Navbar = () => {
   return (
@@ -19,7 +20,7 @@ const Navbar = () => {
           />
           <div className="font-semibold">
             <h1>বাজার দর</h1>
-            <p>মঙ্গলবার, ৬ অক্টোবর, ২০২৬</p>
+            <BanglaDate/>
           </div>
         </div>
         <div className="auth-button flex gap-4 font-semibold items-center ">
