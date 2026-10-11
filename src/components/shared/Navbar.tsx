@@ -1,95 +1,44 @@
 import Image from "next/image";
-import Link from "next/link";
 import logo from "@/assets/logo-icon.png";
+import Link from "next/link";
+import Navlinks from "./Navlinks";
+import { Suspense } from "react";
+import Marquee from "./Marquee";
 
 const Navbar = () => {
   return (
-    <nav className="bg-base-100 shadow-sm">
-      <div className="navbar container mx-auto ">
-        <div className="flex-1 font-semibold flex justify-items-center items-center gap-2">
-          <Image src={logo} alt={"logo.png"} height={38} width={60} className="bg-green-700 p-2               rounded-2xl" />
-          <div className="">
-            <Link href="/" className="btn btn-ghost text-xl text-left">
-              বাজার দর
-            </Link>
-            <p className="ml-4 text-sm">মঙ্গলবার, ৬ অক্টোবর, ২০২৬</p>
+    <header className="shadow-sm ">
+      <nav className="flex items-center gap-2 container mx-auto py-4 justify-between">
+        <div className="flex gap-3">
+          <Image
+            src={logo}
+            alt="logo.png"
+            className="w-12 h-12 bg-green-700 p-1.5 rounded-xl"
+            width={50}
+            height={50}
+          />
+          <div className="font-semibold">
+            <h1>বাজার দর</h1>
+            <p>মঙ্গলবার, ৬ অক্টোবর, ২০২৬</p>
           </div>
         </div>
-        <div className="flex-none">
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle"
-            >
-              <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  {" "}
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />{" "}
-                </svg>
-                <span className="badge badge-sm indicator-item">8</span>
-              </div>
-            </div>
-            <div
-              tabIndex={0}
-              className="card card-sm dropdown-content bg-base-100 z-1 mt-3 w-52 shadow"
-            >
-              <div className="card-body">
-                <span className="text-lg font-bold">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
-              </div>
-            </div>
-            <ul
-              tabIndex={-1}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
+        <div className="auth-button flex gap-4 font-semibold items-center ">
+          <Link href="/" className="">
+            সাইন ইন
+          </Link>
+          <Link
+            href="/"
+            className="bg-green-700 border-none px-4 py-2 rounded-xl text-white shadow-md"
+          >
+            সাইন আপ
+          </Link>
         </div>
-      </div>
-    </nav>
+      </nav>
+      <Navlinks />
+      <Suspense fallback={<div className="h-10 border-y bg-white" />}>
+        <Marquee />
+      </Suspense>
+    </header>
   );
 };
 
